@@ -67,11 +67,9 @@ func (cmd *DecipherCommand) FromArgs(args []string) error {
 }
 
 func (cmd *DecipherCommand) Run() error {
-	answers := breakCaesar(cmd.ciphertext, cmd.lang)
+	shift, deciphered := breakCaesar(cmd.ciphertext, cmd.lang)
 
-	for _, solution := range answers {
-		fmt.Println(solution)
-	}
+	fmt.Printf("Shift: %d\nDeciphered message: %s\n", shift, deciphered)
 
 	return nil
 }

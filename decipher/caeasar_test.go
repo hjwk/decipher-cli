@@ -41,3 +41,33 @@ func TestCaesar(t *testing.T) {
 		})
 	}
 }
+
+func TestCeaserDecipher(t *testing.T) {
+	testCases := map[string]struct {
+		in            string
+		lang          string
+		expectedShift int
+		expectedText  string
+	}{
+		"Not encoded": {
+			"this string is not encoded, and is quite short",
+			"eng",
+			0,
+			"this string is not encoded, and is quite short",
+		},
+		"Basic": {
+			"wklv lv d whvw",
+			"eng",
+			3,
+			"this is a test",
+		},
+	}
+
+	for name, tc := range testCases {
+		t.Run(name, func(t *testing.T) {
+			shift, msg := breakCaesar(tc.in, "eng")
+			assert.Equal(t, tc.expectedShift, shift)
+			assert.Equal(t, tc.expectedText, msg)
+		})
+	}
+}
