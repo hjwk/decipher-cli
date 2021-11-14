@@ -1,4 +1,4 @@
-package decipher
+package caesar
 
 import (
 	"testing"
@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCaesar(t *testing.T) {
+func TestEncipher(t *testing.T) {
 	testCases := map[string]struct {
 		in       string
 		shift    int
@@ -36,13 +36,13 @@ func TestCaesar(t *testing.T) {
 
 	for name, tc := range testCases {
 		t.Run(name, func(t *testing.T) {
-			got := caesar(tc.in, tc.shift)
+			got := Encipher(tc.in, tc.shift)
 			assert.Equal(t, tc.expected, got)
 		})
 	}
 }
 
-func TestCeaserDecipher(t *testing.T) {
+func TestDecipher(t *testing.T) {
 	testCases := map[string]struct {
 		in            string
 		lang          string
@@ -65,7 +65,7 @@ func TestCeaserDecipher(t *testing.T) {
 
 	for name, tc := range testCases {
 		t.Run(name, func(t *testing.T) {
-			shift, msg := breakCaesar(tc.in, "eng")
+			shift, msg := Decipher(tc.in, "eng")
 			assert.Equal(t, tc.expectedShift, shift)
 			assert.Equal(t, tc.expectedText, msg)
 		})

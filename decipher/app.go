@@ -4,6 +4,8 @@ import (
 	"flag"
 	"fmt"
 	"os"
+
+	"github.com/hjwk/decipher/decipher/caesar"
 )
 
 type Command interface {
@@ -67,7 +69,7 @@ func (cmd *DecipherCommand) FromArgs(args []string) error {
 }
 
 func (cmd *DecipherCommand) Run() error {
-	shift, deciphered := breakCaesar(cmd.ciphertext, cmd.lang)
+	shift, deciphered := caesar.Decipher(cmd.ciphertext, cmd.lang)
 
 	fmt.Printf("Shift: %d\nDeciphered message: %s\n", shift, deciphered)
 
@@ -104,7 +106,7 @@ func (cmd *CipherCommand) FromArgs(args []string) error {
 }
 
 func (cmd *CipherCommand) Run() error {
-	answer := caesar(cmd.plaintext, cmd.shift)
+	answer := caesar.Encipher(cmd.plaintext, cmd.shift)
 
 	_, err := fmt.Print(answer)
 	return err

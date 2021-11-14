@@ -1,4 +1,4 @@
-package decipher
+package caesar
 
 import (
 	"math"
@@ -65,11 +65,11 @@ var (
 		'z': 0}
 )
 
-func caesar(in string, shift int) string {
+func Encipher(plaintext string, shift int) string {
 	shift = (shift%26 + 26) % 26 // [0, 25]
-	bytes := make([]byte, len(in))
-	for i := 0; i < len(in); i++ {
-		c := in[i]
+	bytes := make([]byte, len(plaintext))
+	for i := 0; i < len(plaintext); i++ {
+		c := plaintext[i]
 		var a int
 		switch {
 		case 'a' <= c && c <= 'z':
@@ -86,7 +86,7 @@ func caesar(in string, shift int) string {
 	return string(bytes)
 }
 
-func breakCaesar(in, lang string) (int, string) {
+func Decipher(in, lang string) (int, string) {
 	var freqs_ref []float32
 	switch lang {
 	case "eng":
@@ -110,7 +110,7 @@ func breakCaesar(in, lang string) (int, string) {
 		}
 	}
 
-	return shift, caesar(in, -shift)
+	return shift, Encipher(in, -shift)
 }
 
 func countFrequencies(in string) []float32 {
