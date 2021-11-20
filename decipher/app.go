@@ -17,7 +17,7 @@ type Command interface {
 // CLI runs the decipher command line app and returns its exit status.
 func CLI(args []string) int {
 	if len(args) < 1 {
-		fmt.Fprintf(os.Stderr, "You need to use a subcommand\n")
+		fmt.Fprintf(os.Stderr, "You need to use a subcommand. Supported subcommands are: \n- cipher\n- decipher\n")
 		return 1
 	}
 
