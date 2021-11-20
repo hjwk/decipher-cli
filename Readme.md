@@ -5,4 +5,17 @@
 Decipher is a CLI that allows you to play around with various ciphers.
 
 Supported ciphers:
-- caeasar
+- caeasar (enciphering and deciphering)
+- scytale (enciphering)
+
+## How to use
+
+To encipher a text using the caeasar cipher (and the standard shift of 3)
+```
+./decipher cipher -c caesar -t "Attack at once"
+```
+
+To attempt an automatic decipher of a suspected caesar ciphertext
+```
+./decipher decipher -c caesar -t "dwwdfndwrqfh"
+```
