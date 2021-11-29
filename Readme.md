@@ -1,4 +1,4 @@
-[![Go Report Card](https://goreportcard.com/badge/github.com/hjwk/decipher)](https://goreportcard.com/report/github.com/hjwk/decipher)
+[![Go Report Card](https://goreportcard.com/badge/github.com/hjwk/decipher-cli)](https://goreportcard.com/report/github.com/hjwk/decipher-cli)
 [![codecov](https://codecov.io/gh/hjwk/decipher/branch/main/graph/badge.svg?token=NTYTJ9FMH4)](https://codecov.io/gh/hjwk/decipher)
 # Decipher
 
