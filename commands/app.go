@@ -1,11 +1,11 @@
-package decipher
+package commands
 
 import (
 	"flag"
 	"fmt"
 	"os"
 
-	"github.com/hjwk/decipher/decipher/caesar"
+	"github.com/hjwk/decipher/caesar"
 )
 
 type Command interface {

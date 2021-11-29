@@ -3,9 +3,9 @@ package main
 import (
 	"os"
 
-	"github.com/hjwk/decipher/decipher"
+	"github.com/hjwk/decipher-cli/commands"
 )
 
 func main() {
-	os.Exit(decipher.CLI(os.Args[1:]))
+	os.Exit(commands.CLI(os.Args[1:]))
 }
