@@ -30,7 +30,11 @@ func CLI(args []string) int {
 
 	for _, cmd := range commands {
 		if cmd.Name() == command {
-			cmd.FromArgs(os.Args[2:])
+			err := cmd.FromArgs(os.Args[2:])
+			if err != nil {
+				return 1
+			}
+
 			if err := cmd.Run(); err != nil {
 				fmt.Fprintf(os.Stderr, "Runtime error: %v\n", err)
 				return 1
@@ -63,6 +67,16 @@ func NewDecipherCommand() *DecipherCommand {
 func (cmd *DecipherCommand) FromArgs(args []string) error {
 	if err := cmd.flagset.Parse(args); err != nil {
 		return err
+	}
+
+	if !isCipherSupported(cmd.cipher) {
+		cmd.flagset.Usage()
+		return flag.ErrHelp
+	}
+
+	if !isLangSupported(cmd.lang) {
+		cmd.flagset.Usage()
+		return flag.ErrHelp
 	}
 
 	return nil
@@ -102,6 +116,11 @@ func (cmd *CipherCommand) FromArgs(args []string) error {
 		return err
 	}
 
+	if !isCipherSupported(cmd.cipher) {
+		cmd.flagset.Usage()
+		return flag.ErrHelp
+	}
+
 	return nil
 }
 
@@ -114,4 +133,22 @@ func (cmd *CipherCommand) Run() error {
 
 func (cmd *CipherCommand) Name() string {
 	return cmd.flagset.Name()
+}
+
+func isCipherSupported(cipher string) bool {
+	switch cipher {
+	case "casear", "scytale":
+		return true
+	default:
+		return false
+	}
+}
+
+func isLangSupported(lang string) bool {
+	switch lang {
+	case "fr", "eng":
+		return true
+	default:
+		return false
+	}
 }
